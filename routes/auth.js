@@ -14,7 +14,6 @@ router.use(passport.session())
 require('../config/passportConfig')(passport)
 
 // Endpoinst
-
 router.post("/register", async (req, res) => {
     try {
       const existingUser = await User.findOne({ username: req.body.username });

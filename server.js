@@ -17,10 +17,10 @@ app.use(cors({
     methods: ["GET", "POST"], // Add the necessary methods used in your API
     allowedHeaders: ["Content-Type", "credentials"], // Add the necessary headers used in your API
 }))
-app.use(cookieParser("secretcode"))
+app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(
     session({
-        secret: "secretcode",
+        secret: process.env.COOKIE_SECRET,
         resave: true,
         secure: false,
         saveUninitialized: true,
@@ -31,11 +31,13 @@ const authRoutes = require('./routes/auth');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const savedRouter = require('./routes/saved');
+const uploadRouter = require('./routes/upload')
 
 app.use('/auth', authRoutes);
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
 app.use('/saved', savedRouter);
+app.use('/upload', uploadRouter)
 
 
 // routes
