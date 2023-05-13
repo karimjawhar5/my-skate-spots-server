@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 require('dotenv').config()
 require('./config/db');
 
-
 const app = express();
 
 //middleware
@@ -29,7 +28,15 @@ app.use(
 
 // Routers
 const authRoutes = require('./routes/auth');
+const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
+const savedRouter = require('./routes/saved');
+
 app.use('/auth', authRoutes);
+app.use('/posts', postsRouter);
+app.use('/users', usersRouter);
+app.use('/saved', savedRouter);
+
 
 // routes
 app.get("/test", (req, res)=>{

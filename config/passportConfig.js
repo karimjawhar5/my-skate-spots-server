@@ -9,14 +9,14 @@ module.exports = function(passport) {
                 const user = await User.findOne({ username: username });
 
                 if (!user) {
-                    return done(null, false);
+                    return done(null, false, {message: "User not found"});
                 }
 
                 const passed = bcrypt.compareSync(password, user.password);
                 if (passed) {
                     return done(null, user);
                 } else {
-                    return done(null, false);
+                    return done(null, false, {message: "Wrong Username or Password"});
                 }
             } catch (err) {
                 return done(err); // Pass the error to the callback
@@ -30,7 +30,7 @@ module.exports = function(passport) {
 
     passport.deserializeUser(async (id, cb) => {
         try {
-            const user = await User.findOne({ _id: id });
+            const user = await User.findOne({ _id: id }).select('-password');
             if (user) {
                 cb(null, user);
             } else {
