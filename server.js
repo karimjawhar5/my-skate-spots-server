@@ -30,14 +30,14 @@ app.use(
 const authRoutes = require('./routes/auth');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-const savedRouter = require('./routes/saved');
-const uploadRouter = require('./routes/upload')
+const uploadRouter = require('./routes/upload');
+const accountRouter = require('./routes/account');
 
 app.use('/auth', authRoutes);
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
-app.use('/saved', savedRouter);
 app.use('/upload', uploadRouter)
+app.use('/account', accountRouter);
 
 
 // routes

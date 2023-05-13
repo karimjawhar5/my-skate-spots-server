@@ -26,7 +26,7 @@ router.post('/create', async (req, res) => {
 
         await post.save();
 
-        res.status(201).json({ post });
+        res.status(201).json({ message:"created post successfully", data: post });
     }catch(error){
         console.log(error);
         res.status(500).json({error: 'An error occurred while creating the post'})
@@ -47,7 +47,7 @@ router.get('/nearby', async (req, res) => {
               }
             }
           });
-          res.json(posts);
+          res.status(200).json({message:"retreived posts successfully", data: posts});
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: 'Server error finding posts nearby' });
